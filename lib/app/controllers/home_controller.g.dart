@@ -24,6 +24,21 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$resultsFiltersAtom = Atom(name: '_HomeControllerBase.resultsFilters');
+
+  @override
+  ObservableList<User> get resultsFilters {
+    _$resultsFiltersAtom.reportRead();
+    return super.resultsFilters;
+  }
+
+  @override
+  set resultsFilters(ObservableList<User> value) {
+    _$resultsFiltersAtom.reportWrite(value, super.resultsFilters, () {
+      super.resultsFilters = value;
+    });
+  }
+
   final _$loadingUsersAtom = Atom(name: '_HomeControllerBase.loadingUsers');
 
   @override
@@ -57,6 +72,7 @@ mixin _$HomeController on _HomeControllerBase, Store {
   String toString() {
     return '''
 users: ${users},
+resultsFilters: ${resultsFilters},
 loadingUsers: ${loadingUsers}
     ''';
   }

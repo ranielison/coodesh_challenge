@@ -1,8 +1,11 @@
 import 'package:coodesh_challenge_f2/app/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class UserItemWidget extends StatelessWidget {
   final User user;
+
+  static final dformat = DateFormat('dd/MM/yyyy');
 
   const UserItemWidget({
     Key? key,
@@ -12,6 +15,7 @@ class UserItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      margin: EdgeInsets.symmetric(vertical: 5),
       child: Container(
         padding: const EdgeInsets.all(10),
         child: Row(
@@ -32,18 +36,36 @@ class UserItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    user.name!.first!,
+                    '${user.name!.first!} ${user.name!.last!}',
                     style: TextStyle(
                       color: Colors.orange,
                       fontSize: 16,
                     ),
                   ),
                   Text(
-                    user.gender!,
+                    user.location!.city!,
                     style: TextStyle(
                       color: Colors.grey,
                     ),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        user.gender!,
+                        style: TextStyle(
+                          color: Colors.orange,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Text(
+                        dformat.format(DateTime.parse(user.registered!.date!)),
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             )

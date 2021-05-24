@@ -14,7 +14,12 @@ abstract class _HomeControllerBase with Store {
   ObservableList<User> users = ObservableList<User>();
 
   @observable
+  ObservableList<User> resultsFilters = ObservableList<User>();
+
+  @observable
   bool loadingUsers = false;
+
+  String searchField = '';
 
   _HomeControllerBase() {
     loadUsers();
@@ -24,6 +29,23 @@ abstract class _HomeControllerBase with Store {
     setLoadingUsers(true);
     users.addAll(await _userRepository.getUsers());
     setLoadingUsers(false);
+  }
+
+  searchUsers(String term) {
+    List<User> results = users
+        .where(
+          (user) =>
+              user.name!.first!.toLowerCase().startsWith(term.toLowerCase()),
+        )
+        .toList();
+
+    resultsFilters.clear();
+    resultsFilters.addAll(results);
+  }
+
+  changeSearchField(String value) {
+    searchField = value;
+    if (searchField.isNotEmpty) searchUsers(searchField);
   }
 
   @action
