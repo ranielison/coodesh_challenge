@@ -119,6 +119,18 @@ class ModalDetailsUser extends StatelessWidget {
             ),
           ),
         ),
+        Positioned(
+          top: 60,
+          right: 10,
+          child: IconButton(
+            icon: Icon(
+              Icons.close,
+              color: Colors.grey,
+              size: 30,
+            ),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
       ],
     );
   }
