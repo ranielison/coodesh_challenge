@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ShimmerUser extends StatelessWidget {
+class ShimmerData extends StatelessWidget {
   final double? height;
   final double? width;
 
-  const ShimmerUser({
+  const ShimmerData({
     Key? key,
     this.height,
     this.width,

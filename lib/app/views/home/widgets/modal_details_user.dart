@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:coodesh_challenge_f2/app/models/user.dart';
 import 'package:coodesh_challenge_f2/app/utils/app_colors.dart';
+import 'package:coodesh_challenge_f2/app/views/home/widgets/shimmer_data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:unicons/unicons.dart';
@@ -113,8 +115,17 @@ class ModalDetailsUser extends StatelessWidget {
               color: Colors.white,
               shape: BoxShape.circle,
               border: Border.all(width: 5, color: AppColors.orange),
-              image: DecorationImage(
-                image: NetworkImage(user.picture!.large!),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: CachedNetworkImage(
+                useOldImageOnUrlChange: true,
+                imageUrl: user.picture!.large!,
+                fit: BoxFit.cover,
+                progressIndicatorBuilder: (_, __, ___) => ShimmerData(
+                  height: 100,
+                  width: 100,
+                ),
               ),
             ),
           ),
