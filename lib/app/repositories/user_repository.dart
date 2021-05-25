@@ -6,7 +6,7 @@ class UserRepository {
 
   UserRepository(this.provider);
 
-  Future<List<User>> getUsers() async {
-    return provider.getUsers();
+  Future<List<User>> getUsers({int page = 1}) async {
+    return provider.getUsers(page: page);
   }
 }

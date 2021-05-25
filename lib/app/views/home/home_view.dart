@@ -1,8 +1,12 @@
 import 'package:coodesh_challenge_f2/app/controllers/home_controller.dart';
+import 'package:coodesh_challenge_f2/app/utils/app_colors.dart';
+import 'package:coodesh_challenge_f2/app/views/home/widgets/gender_selector.dart';
+import 'package:coodesh_challenge_f2/app/views/home/widgets/user_shimmer.dart';
 import 'package:coodesh_challenge_f2/app/views/home/widgets/users_item_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:unicons/unicons.dart';
 
 class HomeView extends StatelessWidget {
   final controller = GetIt.I.get<HomeController>();
@@ -13,7 +17,7 @@ class HomeView extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Pharma Inc',
-          style: TextStyle(color: Color(0xFFF26522)),
+          style: TextStyle(color: AppColors.navyBlue),
         ),
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -34,29 +38,53 @@ class HomeView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(4),
                         borderSide: BorderSide(color: Colors.grey),
                       ),
-                      suffixIcon: Icon(
-                        Icons.person_search,
-                        color: Colors.grey,
+                      suffixIcon: Observer(
+                        builder: (_) {
+                          return IconButton(
+                            icon: Icon(
+                              controller.searchMode == SearchMode.Name
+                                  ? Icons.person_search
+                                  : UniconsLine.globe,
+                              color: AppColors.skyBlue,
+                            ),
+                            onPressed: controller.toggleSearchMode,
+                          );
+                        },
                       ),
                     ),
                     onChanged: controller.changeSearchField,
                   ),
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.filter_alt_rounded,
-                    color: Colors.grey,
-                    size: 30,
-                  ),
-                  onPressed: () {},
+                Observer(
+                  builder: (_) {
+                    return IconButton(
+                      icon: Icon(
+                        Icons.filter_alt_rounded,
+                        color: controller.enabledFilters
+                            ? AppColors.orange
+                            : Colors.grey,
+                        size: 30,
+                      ),
+                      onPressed: controller.toggleEnabledFilters,
+                    );
+                  },
                 )
               ],
+            ),
+            Observer(
+              builder: (_) {
+                return Visibility(
+                  visible: controller.enabledFilters,
+                  child: GenderSelector(),
+                );
+              },
             ),
             Expanded(
               child: Observer(
                 builder: (context) => controller.loadingUsers
-                    ? Center(child: Text('Carregando'))
-                    : controller.searchField.isNotEmpty
+                    ? Center(child: CircularProgressIndicator())
+                    : controller.searchField.isNotEmpty ||
+                            controller.enabledFilters
                         ? controller.resultsFilters.isNotEmpty
                             ? ListView.builder(
                                 itemCount: controller.resultsFilters.length,

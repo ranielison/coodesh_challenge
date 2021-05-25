@@ -1,6 +1,8 @@
 import 'package:coodesh_challenge_f2/app/models/user.dart';
+import 'package:coodesh_challenge_f2/app/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:unicons/unicons.dart';
 
 class UserItemWidget extends StatelessWidget {
   final User user;
@@ -35,18 +37,31 @@ class UserItemWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    '${user.name!.first!} ${user.name!.last!}',
-                    style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 16,
-                    ),
-                  ),
-                  Text(
-                    user.location!.city!,
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        '${user.name!.first!} ${user.name!.last!}',
+                        style: TextStyle(
+                          color: AppColors.navyBlue,
+                          fontSize: 16,
+                        ),
+                      ),
+                      Spacer(),
+                      Icon(
+                        UniconsLine.globe,
+                        color: AppColors.skyBlue,
+                        size: 20,
+                      ),
+                      SizedBox(width: 3),
+                      Text(
+                        user.nat!,
+                        style: TextStyle(
+                          color: AppColors.orange,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,7 +69,7 @@ class UserItemWidget extends StatelessWidget {
                       Text(
                         user.gender!,
                         style: TextStyle(
-                          color: Colors.orange,
+                          color: AppColors.skyBlue,
                           fontSize: 16,
                         ),
                       ),
@@ -62,6 +77,7 @@ class UserItemWidget extends StatelessWidget {
                         dformat.format(DateTime.parse(user.registered!.date!)),
                         style: TextStyle(
                           color: Colors.grey,
+                          fontSize: 16,
                         ),
                       ),
                     ],

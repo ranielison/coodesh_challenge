@@ -9,9 +9,9 @@ class UserProvider {
     required this.dio,
   });
 
-  Future<List<User>> getUsers() async {
+  Future<List<User>> getUsers({int page = 1}) async {
     final response = await dio.get(
-      'https://randomuser.me/api/?results=50',
+      'https://randomuser.me/api/?results=50&page=$page',
     );
 
     if (response.statusCode == 200) {

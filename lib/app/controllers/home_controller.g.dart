@@ -54,8 +54,81 @@ mixin _$HomeController on _HomeControllerBase, Store {
     });
   }
 
+  final _$searchFieldAtom = Atom(name: '_HomeControllerBase.searchField');
+
+  @override
+  String get searchField {
+    _$searchFieldAtom.reportRead();
+    return super.searchField;
+  }
+
+  @override
+  set searchField(String value) {
+    _$searchFieldAtom.reportWrite(value, super.searchField, () {
+      super.searchField = value;
+    });
+  }
+
+  final _$searchModeAtom = Atom(name: '_HomeControllerBase.searchMode');
+
+  @override
+  SearchMode get searchMode {
+    _$searchModeAtom.reportRead();
+    return super.searchMode;
+  }
+
+  @override
+  set searchMode(SearchMode value) {
+    _$searchModeAtom.reportWrite(value, super.searchMode, () {
+      super.searchMode = value;
+    });
+  }
+
+  final _$enabledFiltersAtom = Atom(name: '_HomeControllerBase.enabledFilters');
+
+  @override
+  bool get enabledFilters {
+    _$enabledFiltersAtom.reportRead();
+    return super.enabledFilters;
+  }
+
+  @override
+  set enabledFilters(bool value) {
+    _$enabledFiltersAtom.reportWrite(value, super.enabledFilters, () {
+      super.enabledFilters = value;
+    });
+  }
+
+  final _$genderFilterSelectedAtom =
+      Atom(name: '_HomeControllerBase.genderFilterSelected');
+
+  @override
+  GenderFilter get genderFilterSelected {
+    _$genderFilterSelectedAtom.reportRead();
+    return super.genderFilterSelected;
+  }
+
+  @override
+  set genderFilterSelected(GenderFilter value) {
+    _$genderFilterSelectedAtom.reportWrite(value, super.genderFilterSelected,
+        () {
+      super.genderFilterSelected = value;
+    });
+  }
+
   final _$_HomeControllerBaseActionController =
       ActionController(name: '_HomeControllerBase');
+
+  @override
+  dynamic changeSearchField(String value) {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.changeSearchField');
+    try {
+      return super.changeSearchField(value);
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic setLoadingUsers(bool value) {
@@ -69,11 +142,48 @@ mixin _$HomeController on _HomeControllerBase, Store {
   }
 
   @override
+  dynamic toggleSearchMode() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.toggleSearchMode');
+    try {
+      return super.toggleSearchMode();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic toggleGenderFilter() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.toggleGenderFilter');
+    try {
+      return super.toggleGenderFilter();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic toggleEnabledFilters() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.toggleEnabledFilters');
+    try {
+      return super.toggleEnabledFilters();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 users: ${users},
 resultsFilters: ${resultsFilters},
-loadingUsers: ${loadingUsers}
+loadingUsers: ${loadingUsers},
+searchField: ${searchField},
+searchMode: ${searchMode},
+enabledFilters: ${enabledFilters},
+genderFilterSelected: ${genderFilterSelected}
     ''';
   }
 }
